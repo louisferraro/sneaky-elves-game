@@ -1,0 +1,43 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Level1 : MonoBehaviour
+{
+    public float speed; // TODO: data
+    public float waitTime;
+    public float startWaitTime;
+    public Transform moveSpot;
+    // boundaries for our enemy ai
+    public float minX;
+    public float maxX;
+    public float minY;
+    public float maxY;
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        waitTime = startWaitTime;
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // enemy will move to a random location
+        transform.position = Vector2.MoveTowards(transform.position, moveSpot.position, speed * Time.deltaTime);
+
+        if(Vector2.Distance(transform.position, moveSpot.position) < 0.2f)
+        {
+            if(waitTime <= 0)
+            {
+                waitTime = startWaitTime;
+            }
+            else
+            {
+                waitTime -= Time.deltaTime;
+            }
+        }
+    }
+}
